@@ -26,26 +26,20 @@ corteMortal = UnElemento{
     ataque = causarDanio 100,
     defensa = proteccion 0
 }
-jack :: Personaje
-jack = UnPersonaje{
-    nombre = "Jack",
-    salud = 100,
-    elementos = [evasion],
-    anioPresente = 1700
-}
+
 aku :: Personaje
 aku = UnPersonaje{
     nombre = "Aku",
     salud = 200,
     elementos = [hechizo,corteMortal],
-    anioPresente = 1700
+    anioPresente = 200
 }
 enemigoGenerico :: Personaje
 enemigoGenerico = UnPersonaje{
     nombre = "EnemigoGenerico",
     salud = 50,
     elementos = [],
-    anioPresente = 1700
+    anioPresente = 200
 }
 generadorEnemigos :: Personaje->Elemento->Personaje
 generadorEnemigos enem elemento= enem {elementos = (elementos enem)++ [elemento] }
@@ -67,12 +61,6 @@ causarDanio danio personaje
     |danio<(salud personaje) = modificarSalud personaje (+(-danio))
     |otherwise = modificarSalud personaje (*0)
 
---Punto 2
-{-a. esMalvado, que retorna verdadero si alguno de los elementos que tiene el personaje
-en cuestión es de tipo “Maldad”.
-b. danioQueProduce :: Personaje -> Elemento -> Float, que retorne la diferencia entre
-la salud inicial del personaje y la salud del personaje luego de usar el ataque del
-elemento sobre él. -}
 esMalvado :: Personaje->Bool
 esMalvado = (elem "Maldad").(map tipo).elementos
 
@@ -84,3 +72,40 @@ enemigosMortales personaje  = filter (mataDeUnGolpe)
     where mataDeUnGolpe = (\enemigo -> any ((>= salud personaje).(danioQueProduce personaje)) (elementos enemigo))
 
 --Punto 3
+concentracion3 :: Elemento
+concentracion3 = UnElemento{
+    tipo = "Magia",
+    ataque = causarDanio 0,
+    defensa = concentracion 3
+}
+
+concentracion :: Int->(Personaje->Personaje)
+concentracion 0 = flip modificarSalud (*1)
+concentracion 1 = meditar
+concentracion n = meditar.concentracion (n-1)
+
+esbirro :: Elemento
+esbirro = UnElemento{
+    tipo = "Maldad",
+    ataque = causarDanio 1,
+    defensa = proteccion 0
+}
+
+esbirrosMalvados :: Int -> [Elemento]
+esbirrosMalvados 0 = []
+esbirrosMalvados n = esbirro:esbirrosMalvados (n-1)
+
+katanaMagica :: Elemento
+katanaMagica = UnElemento{
+    tipo = "Magia",
+    ataque = causarDanio 1000,
+    defensa = proteccion 0
+}
+
+jack :: Personaje
+jack = UnPersonaje{
+    nombre = "Jack",
+    salud = 300,
+    elementos = [katanaMagica,concentracion3],
+    anioPresente = 200
+}
