@@ -27,13 +27,6 @@ corteMortal = UnElemento{
     defensa = proteccion 0
 }
 
-aku :: Personaje
-aku = UnPersonaje{
-    nombre = "Aku",
-    salud = 200,
-    elementos = [hechizo,corteMortal],
-    anioPresente = 200
-}
 enemigoGenerico :: Personaje
 enemigoGenerico = UnPersonaje{
     nombre = "EnemigoGenerico",
@@ -44,8 +37,8 @@ enemigoGenerico = UnPersonaje{
 generadorEnemigos :: Personaje->Elemento->Personaje
 generadorEnemigos enem elemento= enem {elementos = (elementos enem)++ [elemento] }
 --Punto 1
-mandarAlAnio :: Personaje->Int->Personaje
-mandarAlAnio personaje anio= personaje {anioPresente = anio}
+mandarAlAnio :: Int->Personaje->Personaje
+mandarAlAnio anio personaje= personaje {anioPresente = anio}
 
 modificarSalud :: Personaje->(Float->Float)->Personaje
 modificarSalud personaje modSalud = personaje {salud= modSalud (salud personaje)}
@@ -72,17 +65,20 @@ enemigosMortales personaje  = filter (mataDeUnGolpe)
     where mataDeUnGolpe = (\enemigo -> any ((>= salud personaje).(danioQueProduce personaje)) (elementos enemigo))
 
 --Punto 3
-concentracion3 :: Elemento
-concentracion3 = UnElemento{
-    tipo = "Magia",
-    ataque = causarDanio 0,
-    defensa = concentracion 3
-}
+--concentracion3 :: Elemento
+--concentracion3 = UnElemento{
+--    tipo = "Magia",
+--    ataque = causarDanio 0,
+--    defensa = concentracion 3
+--}
 
-concentracion :: Int->(Personaje->Personaje)
-concentracion 0 = flip modificarSalud (*1)
-concentracion 1 = meditar
-concentracion n = meditar.concentracion (n-1)
+auxConcentracion :: Int->(Personaje->Personaje)
+auxConcentracion 0 = flip modificarSalud (*1)
+auxConcentracion 1 = meditar
+auxConcentracion n = meditar.auxConcentracion (n-1)
+
+concentracion :: Int->Elemento
+concentracion n = UnElemento "Magia" (causarDanio 0) (auxConcentracion n)
 
 esbirro :: Elemento
 esbirro = UnElemento{
@@ -106,6 +102,16 @@ jack :: Personaje
 jack = UnPersonaje{
     nombre = "Jack",
     salud = 300,
-    elementos = [katanaMagica,concentracion3],
+    elementos = [katanaMagica,concentracion 3],
     anioPresente = 200
 }
+portalAlFuturo :: Elemento
+portalAlFuturo = UnElemento{
+    tipo = "Magia",
+    ataque = mandarAlAnio 3000,
+    defensa = (\personaje -> aku ((anioPresente personaje)+2800) (salud personaje))
+}
+aku :: Int -> Float -> Personaje
+aku anio vida = UnPersonaje "aku" vida ([concentracion 4,portalAlFuturo]++(esbirrosMalvados (anio*100))) anio
+
+--Punto 4, luchar
