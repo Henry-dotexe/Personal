@@ -115,3 +115,20 @@ aku :: Int -> Float -> Personaje
 aku anio vida = UnPersonaje "aku" vida ([concentracion 4,portalAlFuturo]++(esbirrosMalvados (anio*100))) anio
 
 --Punto 4, luchar
+{-Finalmente queremos saber cómo puede concluir la lucha entre Jack y Aku. Para ello hay
+que definir la función luchar :: Personaje -> Personaje -> (Personaje, Personaje) donde
+se espera que si el primer personaje (el atacante) está muerto, retorne la tupla con el
+defensor primero y el atacante después, en caso contrario la lucha continuará
+invirtiéndose los papeles (el atacante será el próximo defensor) luego de que ambos
+personajes se vean afectados por el uso de todos los elementos del atacante.
+
+O sea que si luchan Jack y Aku siendo Jack el primer atacante, Jack se verá afectado por
+el poder defensivo de la concentración y Aku se verá afectado por el poder ofensivo de la
+katana mágica, y la lucha continuará con Aku (luego del ataque) como atacante y con
+Jack (luego de la defensa) como defensor.-}
+aplicarElementos :: (Personaje->(Personaje->Personaje))-> [Elemento]->Personaje-> Personaje
+aplicarElementos atributo listaelem = foldl1 (.) (map atributo listaelem)
+luchar :: Personaje->Personaje->(Personaje,Personaje)
+luchar atacante defensor 
+ |(salud atacante)==0 = (nombre defensor,nombre atacante)
+ |(salud atacante)>0 = luchar (aplicarElementos ataque (elementos atacante) defensor) (aplicarElementos defensa (elementos atacante) atacante)
