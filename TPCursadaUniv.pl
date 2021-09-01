@@ -63,7 +63,7 @@ correlativa(legislacion,analisis_de_Sistemas).
 correlativa(legislacion,ingenieria_y_Sociedad).
 correlativa(administracion_de_Recursos,disenio_de_Sistemas).
 correlativa(administracion_de_Recursos,sistemas_Operativos).
-Correlativa(administracion_de_Recursos,economia).
+correlativa(administracion_de_Recursos,economia).
 correlativa(ingenieria_de_Software,probabilidad_y_Estadistica).
 correlativa(ingenieria_de_Software,disenio_de_Sistemas).
 correlativa(ingenieria_de_Software,gestion_de_Datos).
