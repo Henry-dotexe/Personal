@@ -1,0 +1,45 @@
+* {
+    margin: 3px;
+}
+
+header {
+    background-color: lightcoral;
+    border: 3px solid black;
+}
+
+main {
+    background-color: lightblue;
+    border: 3px solid black;
+    height: 1100px;
+}
+
+nav {
+    border: 1px solid black;
+    background-color: aquamarine;
+}
+
+.caja {
+    border: 1px solid black;
+    display: inline-block;
+}
+
+.lateral {
+    background-color: lightpink;
+    border: 3px solid black;
+    width: 250px;
+    height: 1000px;
+    padding: 5px;
+    display: inline-block;
+}
+
+.imagen {
+    background-color: white;
+    border: 1px solid black;
+    width: 200px;
+    height: 200px;
+}
+
+.textocentrado {
+    text-align: center;
+    justify-content: center;
+    font-size: large;
