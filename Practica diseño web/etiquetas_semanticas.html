@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Etiquetas semánticas</title>
+    <style>
+        * {
+            margin: 3px;
+        }
+
+        header {
+            background-color: lightcoral;
+            border: 3px solid black;
+        }
+
+        main {
+            background-color: lightblue;
+            border: 3px solid black;
+            height: 1100px;
+        }
+
+        nav {
+            border: 1px solid black;
+            background-color: aquamarine;
+        }
+
+        .caja {
+            border: 1px solid black;
+            display: inline-block;
+        }
+
+        .lateral {
+            background-color: lightpink;
+            border: 3px solid black;
+            width: 250px;
+            height: 1000px;
+            padding: 5px;
+            display: inline-block;
+        }
+
+        .imagen {
+            background-color: white;
+            border: 1px solid black;
+            width: 200px;
+            height: 200px;
+        }
+
+        .textocentrado {
+            text-align: center;
+            justify-content: center;
+            font-size: large;
+
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <legend>Header</legend>
+        <nav>
+            <legend>Navigator</legend>
+            <div style="border:3px solid black; padding:3px;">
+
+                <div class="caja">
+                    <h2>Aqui va logo</h2>
+                </div>
+                <div class="caja">
+                    <h2>Barra de búsqueda</h2>
+                </div>
+                <div class="caja">
+                    <h2>Botón 1</h2>
+                </div>
+                <div class="caja">
+                    <h2>Botón 2</h2>
+                </div>
+                <div class="caja">
+                    <h2>Botón 3</h2>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <legend>Main</legend>
+        <aside class="lateral">
+            <legend>Aside</legend>
+            <div class="imagen">
+                <h2 class="textocentrado">Imagen</h2>
+            </div>
+            <div class="imagen">
+                <h2 class="textocentrado">Imagen</h2>
+            </div>
+            <div class="imagen">
+                <h2 class="textocentrado">Imagen</h2>
+            </div>
+        </aside>
+
+        <div style="display:inline-block;">
+            <article style="border:3px solid black;">
+                <legend>Article</legend>
+            </article>
+        </div>
+        <div style="display:inline-block;">
+            <section style="border:3px solid black; display:inline-block;">
+                <legend>Section</legend>
+
+            </section>
+        </div>
+
+
+    </main>
+    <footer style="border:3px solid black; height: 100px;background-color: bisque;">
+        <legend>Footer</legend>
+
+    </footer>
+</body>
+
+</html>
