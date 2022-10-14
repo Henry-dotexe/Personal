@@ -1,0 +1,99 @@
+*{
+    box-sizing: border-box;
+}
+body{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cajaloca {
+    border: 3px solid black;
+    /* width: 30vw; */
+    height: 10vh;
+    transform: scale(1, 1) translate(100px, 100px) rotate(0deg);
+    /* transition: <property> <duration> <timing-function> <delay> */
+    /* transition-property: all;
+    transition-duration: 3000ms;
+    transition-timing-function: ease-out;
+    transition-delay: 500ms; */
+    /* animation: <name> <duration> <timing-function> <delay> <iteration-count> <direction> <fill-mode> <play-state> */
+    animation: caja-fiesta 1s linear 0s infinite normal none running;
+
+}
+
+@keyframes caja-fiesta {
+    0% {
+        background-color: blue;
+        width: 30vw;
+        transform: translate(100px, 100px);
+    }
+
+    25% {
+        background-color: red;
+        width: 40vw;
+        transform: translate(300px, 100px) rotate(90deg);
+    }
+
+    50% {
+        background-color: blue;
+        width: 30vw;
+        transform: translate(300px, 300px) rotate(180deg);
+    }
+
+    75% {
+        background-color: red;
+        width: 40vw;
+        transform: translate(100px, 300px) rotate(270deg);
+    }
+
+    100% {
+        background-color: blue;
+        width: 30vw;
+        transform: translate(100px, 100px) rotate(360deg);
+    }
+}
+ /* De aqui para abajo son clases para la barra de busqueda desplegable */
+
+
+.srch {
+    padding: 5px;
+    position: absolute;
+}
+
+.srch input {
+    width: 0px;
+    height: 40px;
+    padding: 0 20px;
+    font-size: 18px;
+    color: black;
+    outline: none;
+    border: 1px solid silver;
+    border-radius: 30px; /*Este border es para el input*/
+    transition: all 0.6s ease;
+}
+
+.btn {
+    width: 55px;
+    height: 55px;
+    line-height: 55px;
+    /* Las sig 3 propiedades son las que hacen que el btn quede sobre el input */
+    position: absolute; 
+    top: 0px;
+    right: 0px;
+
+    text-align: center;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #440080;
+    color: white;
+    border-radius: 50%; /*Este border es para el boton*/
+}
+
+.srch:hover input{
+    width: 400px;
+    align-self: center;
+}
+
+.srch input:focus {
+    width: 400px;
+}
