@@ -1,0 +1,50 @@
+*{
+    margin: auto;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: center;
+}
+
+header{
+    background-color: aliceblue;
+    /* display: flex; */
+    /* align-items: center; */
+    /* justify-content: center; */
+}
+a{
+    text-decoration: none;
+}
+#navegador {
+    background-color: navy;
+    width: 100vw;
+    height: 40px;
+}
+
+#navegador ul li{
+    list-style-type: none;
+    background-color: violet;
+    border: 1px solid grey;
+    display: inline-block;
+    position: relative;
+    padding: 10px 15px;
+}
+
+#subseccion1 {
+    position: absolute;
+    background-color: violet;
+    top: 100%;
+    left: 0px;
+    display: none;
+}
+
+#navegador ul li:hover{
+    background-color: blueviolet;
+}
+
+#navegador ul li:hover #subseccion1{
+    display:block;
+}
+
+#subseccion1 a:hover{
+    color: white;
+}

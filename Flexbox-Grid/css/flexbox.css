@@ -1,0 +1,55 @@
+*{
+    margin: 0; 
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.padre{
+    width: 80%;
+    height: 500px;
+    margin: 50px auto;
+    background:lightblue;
+    border: 2px solid blue;
+    display: flex;
+    flex-direction: row;
+    /* flex-direction: row-reverse; */
+    /* flex-direction: column; */
+    /* flex-direction: column-reverse; */
+    flex-wrap: wrap;
+    /* justify-content: flex-start; */
+    /* justify-content: center; */
+    /* justify-content: space-between; */
+    /* justify-content: space-around; */
+    /* justify-content: space-evenly; */
+    /* align-items: flex-start; */
+    /* align-items: flex-end; */
+    align-items: center;
+    /* align-content: stretch; */
+    /* align-content: center; */
+    /* align-content: flex-end; */
+    /* align-content: flex-start; */
+    /* align-content: baseline; */
+    /* align-content: space-between; */
+    align-content: space-around;
+
+}
+
+.hijo{
+    background: navy;
+    border: 2px dashed white;
+    width: 200px;
+    height: 100px;
+    color: white;
+    margin: 30px;
+    padding: 20px;
+    text-align: center;
+    font-size: 40px;
+}
+
+.chico{
+    font-size: 10px;
+}
+
+.grande{
+    font-size: 60px;
+}
