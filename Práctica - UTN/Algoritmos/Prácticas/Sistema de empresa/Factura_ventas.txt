@@ -1,0 +1,11 @@
+Informe de las ventas del día
+
+Codigo de producto	Cantidad vendida
+     1500			  10
+     1022			  15
+     1500			  5
+     1001			  10
+     1003			  5
+     1003			  15
+     1015			  7
+     1018			  5

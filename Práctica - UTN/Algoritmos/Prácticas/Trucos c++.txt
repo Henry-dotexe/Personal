@@ -1,0 +1,17 @@
+~Para imprimir caracteres con tilde, usamos la siguiente librería:
+#include <locale.h> /* setlocale */
+Que nos permite usar la función setlocale:
+setlocale(LC_ALL, "spanish"); /* Permite imprimir caracteres con tilde */
+
+~Para funciones de la consola usamos la librería:
+<stdlib.h>
+Con la cual podemos limpiar la pantalla con la función system("cls")
+
+~Secuencias de escape
+\n - Similar al endl
+\t - tab horizontal
+\v - tab vertical
+\b - backspace
+\a - campana del sistema
+\' y \" - para representar comillas en texto
+\0 - Fin de una cadena de caracteres
