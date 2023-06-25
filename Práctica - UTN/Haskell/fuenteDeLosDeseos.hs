@@ -71,10 +71,10 @@ listaCiudades :: [String]
 listaCiudades = ["New york","Madrid","Tokio"] --Lista de ciudades de prueba
 
 recibirseDeCarrera :: Persona -> String -> Persona
-recibirseDeCarrera per carrera = (nombre per,edad per,cantsueños per,((felicidonios per) + ((1000*).length) carrera),((habilidad per) ++ " , " ++ carrera))
+recibirseDeCarrera per carrera = (nombre per,edad per,cantsueños per,felicidonios per + 1000 * length carrera,habilidad per ++ " , " ++ carrera)
 
 viajarACiudades :: Persona -> [String] -> Persona
-viajarACiudades per ciudades = (nombre per, ((+1).edad) per, cantsueños per, (felicidonios per) + ((100*).length) ciudades, habilidad per)
+viajarACiudades per ciudades = (nombre per, ((+1).edad) per, cantsueños per, felicidonios per + ((100*).length) ciudades, habilidad per)
 
 enamorarseDeOtraPersona :: Persona -> Persona -> Persona
 enamorarseDeOtraPersona per1 per2 = (nombre per1, edad per1, cantsueños per1, felicidonios per1 + felicidonios per2, habilidad per1)
