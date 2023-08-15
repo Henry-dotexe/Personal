@@ -103,32 +103,14 @@ integradora(disenio_de_Sistemas).
 integradora(administracion_de_Recursos).
 integradora(proyecto_Final).
 
-%Punto 1, Materia pesada
-materiaPesada(Materia) :- materia(Materia,Horas),integradora(Materia),Horas=6.
-materiaPesada(Materia) :- materia(Materia,Horas),not(integradora(Materia)),Horas>=4.
-
-%Punto 2, Correlativas
-materiaInicial(Materia) :- materia(Materia,_),not(correlativa(Materia,_)).
-materiasNecesariasParaCursar(Materia,MateriasRequeridas) :- materia(Materia,_),correlativa(Materia,MateriasRequeridas).
-
-materiaQueHabilita(Materia,Correlativa) :- correlativa(Correlativa,Materia).
-
-%Punto 3, los estudiantes, materias cursadas y aprobadas
-notaCursada(vero,Materia,Nota) :- materiaInicial(Materia),Nota is 8.
+%notaCursada
 notaCursada(alan,sistemas_y_Organizaciones,6).
 notaCursada(alan,analisis_Matematico_I,6).
 notaCursada(alan,analisis_de_Sistemas,2).
 notaCursada(alan,analisis_de_Sistemas,9).
 notaCursada(alan,fisica_I,2).
+
+
 notaFinal(vero,ingles_II,10).
 notaFinal(alan,sistemas_y_Organizaciones,4).
 notaFinal(alan,ingles_I,2).
-
-materiaCursada(Alumno,Materia) :- materiaAprobada(Alumno,Materia). %Para que considere cursadas aprobadas
-materiaCursada(Alumno,Materia) :- notaCursada(Alumno,Materia,Nota),Nota>5.
-materiaAprobada(Alumno,Materia) :- notaFinal(Alumno,Materia,Nota),Nota>5. 
-materiaAprobada(Alumno,Materia) :- notaCursada(Alumno,Materia,Nota), Nota>7. %Promocion
-materiaAprobada(Alumno,Materia) :- notaFinal(Alumno,Materia,Nota),libre(Materia),Nota>5. %Aprobado por libre
-
-%Punto 4, modalidades (1.Primer cuatri,2.Segundo cuatri, 3.Verano)
-%cursada(Alumno,Materia,Nota,fecha(año,modalidad))
