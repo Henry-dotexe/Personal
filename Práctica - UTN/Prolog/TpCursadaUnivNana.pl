@@ -114,3 +114,11 @@ notaCursada(alan,fisica_I,2).
 notaFinal(vero,ingles_II,10).
 notaFinal(alan,sistemas_y_Organizaciones,4).
 notaFinal(alan,ingles_I,2).
+
+%Punto 1
+materiaPesada(Materia) :- materia(Materia,Horas),integradora(Materia),Horas is 6.
+materiaPesada(Materia) :- materia(Materia,Horas),not(integradora(Materia)),Horas=<4.
+
+%Punto 2
+%materiaInicial(Materia) :- not (correlativa(Materia,_)), materia (Materia,_).
+%correlativas (Correlativa) :- 
