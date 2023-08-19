@@ -69,3 +69,94 @@ nivelAptitud(servicial, 20).
 nivelAptitud(propensoAccidentes, 10).
 nivelAptitud(damiselaEnApuros, 10).
 nivelAptitud(nadaParaDestacar, 5).
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Predicados auxiliares
+esAuto(Auto):-feature(Auto,_).
+
+%Punto 1a. esAutoPeligroso\1
+esAutoPeligroso(Auto) :- equipo(Auto,Pasajeros),member(patan,Pasajeros).
+esAutoPeligroso(Auto) :- findall(Arma,feature(Auto,arma(Arma)),Armas),length(Armas,L),L>=2.
+
+%Punto 1b. vaConPropulsion\1
+vaConPropulsion(Auto) :- feature(Auto,capacidad(velocidad)).
+
+%Punto 1c. esSeguroEstarCerca\1
+esSeguroEstarCerca(Auto):- esAuto(Auto),not(feature(Auto,arma(_))).
+
+%Punto 2. puedeSortearObstaculo\2
+puedeSortearObstaculo(Auto,Obstaculo):- esAuto(Auto), obstaculo(_,Obstaculo),capacidadRequerida(Obstaculo,CapacidadRequerida),feature(Auto,capacidad(CapacidadRequerida)).
+
+puedeSortearObstaculo(Auto,Obstaculo):- esAuto(Auto), obstaculo(_,Obstaculo),capacidadRequerida(Obstaculo,CapacidadRequerida),feature(Auto,transformacion(_,Capacidades)),member(CapacidadRequerida,Capacidades).
+
+%Punto 3. autoConclusiva\1
+
+primero([Cabeza | _],Cabeza).
+
+ultimo([Ultimo],Ultimo).
+ultimo([_|Cola],Ultimo):-ultimo(Cola,Ultimo).
+
+autoConclusiva(Carrera) :- carrera(Carrera,Tramos),primero(Tramos,Primero),ultimo(Tramos,Ultimo), Primero = Ultimo.
+
+%Punto 4. puedeTransitar\2
+
+esObstaculo(Obstaculo,Carrera) :-
+    carrera(Carrera,Tramos),
+    obstaculo(Tramo,Obstaculo),
+    member(tramo(Tramo),Tramos).
+
+puedeTransitar(Auto,Carrera) :- 
+    esAuto(Auto),
+    carrera(Carrera,_),
+    forall(esObstaculo(Obstaculo,Carrera),
+    puedeSortearObstaculo(Auto,Obstaculo)).
+
+%Punto 5. esImpochible\1 
+
+esImpochible(Carrera):- 
+    carrera(Carrera,_), 
+    not(puedeTransitar(_,Carrera)).
+
+%Punto 6a. nivelDeAptitudDelCompetidor\2
+
+nivelDeAptitudDelCompetidor(Competidor, LvlAptitud) :- 
+    findall(Nivel,(personalidad(Competidor,Personalidad),
+    nivelAptitud(Personalidad,Nivel)),Niveles),
+    sumlist(Niveles,Suma),
+    LvlAptitud=Suma.
+
+%Punto 6b. nivelDeAptitudDelVehiculo\2
+
+nivelDeAptitudDelVehiculo(Vehiculo,LvlAptitud) :- 
+    findall(Arma,(feature(Vehiculo,Arma),Arma=arma(_)),Armas),findall(Transformacion,(feature(Vehiculo,Transformacion),Transformacion=transformacion(_,_)),Transformaciones),
+    findall(Capacidad,(feature(Vehiculo,Capacidad),Capacidad=capacidad(_)),Capacidades),
+    length(Armas,L1),
+    length(Transformaciones,L2),
+    length(Capacidades,L3), 
+    LvlAptitud is 5 * L1 + 10 * L2 + 15 * L3.
+
+%Punto 6c. nivelDeAptitudParacompetir\2
+
+vaEnAuto(Auto,Competidor) :- equipo(Auto,Competidores),member(Competidor,Competidores).
+
+nivelDeAptitudParaCompetir(Auto,LvlAptitud):-
+    esAuto(Auto), 
+    nivelDeAptitudDelVehiculo(Auto,LvlAuto),
+    findall(LvlCompetidor,(vaEnAuto(Auto,Competidor),nivelDeAptitudDelCompetidor(Competidor,LvlCompetidor)),Niveles),
+    sumlist(Niveles,SumaNiveles),
+    LvlAptitud is LvlAuto + SumaNiveles.
+
+%Punto 7. vehiculoGanador\1
+
+mayorNivelDeCompetencia(Auto,NivelMax):-
+    findall(Nivel,nivelDeAptitudParaCompetir(Auto,Nivel),Niveles),
+    max_member(Lvl, Niveles),
+    NivelMax = Lvl.
+    
+
+vehiculoGanador(Auto):- 
+    esAuto(Auto),
+    Auto\=elRocomovil,
+    mayorNivelDeCompetencia(_,Nivel),
+    nivelDeAptitudParaCompetir(Auto,Nivel).

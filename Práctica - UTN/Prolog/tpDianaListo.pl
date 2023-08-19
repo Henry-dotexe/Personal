@@ -106,7 +106,6 @@ esImpochible(Carrera):-
 %---------------- Punto 6 -------------------
 %nivelDeAptitudDelCompetidor\2: esta dado por las personalidades del competidor. Como un competidor puede tener más de una personalidad, su nivel de aptitud es la suma del nivel de aptitud de todas sus personalidades.
 
-%nivelDeAptitudDelCompetidor(Competidor, LvlAptitud)
 nivelDeAptitudDelCompetidor(Competidor, LvlAptitud) :- findall(Nivel,(personalidad(Competidor,Personalidad),nivelAptitud(Personalidad,Nivel)),Niveles),sumlist(Niveles,Suma),LvlAptitud=Suma.
 
 %nivelDeAptitudDelVehiculo\2: es la suma de los puntos que le dan cada feature, siendo:
