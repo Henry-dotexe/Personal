@@ -69,3 +69,6 @@ nivelAptitud(servicial, 20).
 nivelAptitud(propensoAccidentes, 10).
 nivelAptitud(damiselaEnApuros, 10).
 nivelAptitud(nadaParaDestacar, 5).
+
+%Punto 1
+esAutoPeligroso()
