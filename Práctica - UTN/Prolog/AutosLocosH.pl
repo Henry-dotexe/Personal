@@ -154,8 +154,7 @@ nivelDeAptitudParaCompetir(Auto,LvlAptitud):-
 
 mayorNivelDeCompetencia(Auto,NivelMax):-
     findall(Nivel,nivelDeAptitudParaCompetir(Auto,Nivel),Niveles),
-    max_member(Lvl, Niveles),
-    NivelMax = Lvl.
+    max_member(NivelMax, Niveles).
     
 
 vehiculoGanador(Auto):- 
