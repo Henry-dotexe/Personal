@@ -121,6 +121,7 @@ esImpochible(Carrera):-
 %Punto 6a. nivelDeAptitudDelCompetidor\2
 
 nivelDeAptitudDelCompetidor(Competidor, LvlAptitud) :- 
+    personalidad(Competidor,_),
     findall(Nivel,(personalidad(Competidor,Personalidad),
     nivelAptitud(Personalidad,Nivel)),Niveles),
     sumlist(Niveles,Suma),
@@ -128,9 +129,11 @@ nivelDeAptitudDelCompetidor(Competidor, LvlAptitud) :-
 
 %Punto 6b. nivelDeAptitudDelVehiculo\2
 
-nivelDeAptitudDelVehiculo(Vehiculo,LvlAptitud) :- 
-    findall(Arma,(feature(Vehiculo,Arma),Arma=arma(_)),Armas),findall(Transformacion,(feature(Vehiculo,Transformacion),Transformacion=transformacion(_,_)),Transformaciones),
-    findall(Capacidad,(feature(Vehiculo,Capacidad),Capacidad=capacidad(_)),Capacidades),
+nivelDeAptitudDelVehiculo(Auto,LvlAptitud) :- 
+    esAuto(Auto),
+    findall(Arma,(feature(Auto,Arma),Arma=arma(_)),Armas),
+    findall(Transformacion,(feature(Auto,Transformacion),Transformacion=transformacion(_,_)),Transformaciones),
+    findall(Capacidad,(feature(Auto,Capacidad),Capacidad=capacidad(_)),Capacidades),
     length(Armas,L1),
     length(Transformaciones,L2),
     length(Capacidades,L3), 
