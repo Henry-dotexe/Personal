@@ -120,5 +120,11 @@ materiaPesada(Materia) :- materia(Materia,Horas),integradora(Materia),Horas is 6
 materiaPesada(Materia) :- materia(Materia,Horas),not(integradora(Materia)),Horas=<4.
 
 %Punto 2
-%materiaInicial(Materia) :- not (correlativa(Materia,_)), materia (Materia,_).
-%correlativas (Correlativa) :- 
+materiaInicial(Materia) :- materia(Materia,_), not(correlativa(Materia,_)).
+
+materiaNecesaria(Materia,MateriaNecesaria) :- 
+    correlativa(Materia,MateriaNecesaria).
+
+materiaNecesaria(Materia,MateriaNecesaria) :- 
+    correlativa(Materia,CorrelativaInferior),
+    materiaNecesaria(CorrelativaInferior,MateriaNecesaria).
