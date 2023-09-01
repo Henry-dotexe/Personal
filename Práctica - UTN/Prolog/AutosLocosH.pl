@@ -86,9 +86,18 @@ vaConPropulsion(Auto) :- feature(Auto,capacidad(velocidad)).
 esSeguroEstarCerca(Auto):- esAuto(Auto),not(feature(Auto,arma(_))).
 
 %Punto 2. puedeSortearObstaculo\2
-puedeSortearObstaculo(Auto,Obstaculo):- esAuto(Auto), obstaculo(_,Obstaculo),capacidadRequerida(Obstaculo,CapacidadRequerida),feature(Auto,capacidad(CapacidadRequerida)).
+puedeSortearObstaculo(Auto,Obstaculo):- 
+    esAuto(Auto),
+    obstaculo(_,Obstaculo),
+    capacidadRequerida(Obstaculo,CapacidadRequerida),
+    feature(Auto,capacidad(CapacidadRequerida)).
 
-puedeSortearObstaculo(Auto,Obstaculo):- esAuto(Auto), obstaculo(_,Obstaculo),capacidadRequerida(Obstaculo,CapacidadRequerida),feature(Auto,transformacion(_,Capacidades)),member(CapacidadRequerida,Capacidades).
+puedeSortearObstaculo(Auto,Obstaculo):- 
+    esAuto(Auto), obstaculo(_,Obstaculo),
+    capacidadRequerida(Obstaculo,CapacidadRequerida),
+    feature(Auto,transformacion(_,Capacidades)),
+    member(CapacidadRequerida,Capacidades).
+
 
 %Punto 3. autoConclusiva\1
 
